@@ -1,0 +1,55 @@
+name: tests-and-pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+      - name: Зависимости
+        run: uv sync --group dev
+      - name: Линтер
+        run: |
+          uv run ruff check .
+          uv run ruff format --check .
+      - name: Браузер
+        run: uv run playwright install --with-deps chromium
+      - name: Проверки сайта в браузере
+        run: uv run pytest
+
+  deploy:
+    # Публикуется только то, что прошло проверки.
+    needs: tests
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Только файлы сайта
+        run: |
+          mkdir _site
+          cp -r index.html css js _site/
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+      - id: deployment
+        uses: actions/deploy-pages@v4

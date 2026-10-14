@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ru" data-theme="classic">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Шиномонтаж «Колесо» — Куркино, каждый день 9:00–21:00</title>
+  <meta name="description" content="Шиномонтаж, балансировка, ремонт и хранение шин в Куркино. Цены, калькулятор и онлайн-запись.">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">К содержанию</a>
+
+  <header class="header">
+    <div class="container header__row">
+      <a class="logo" href="#top" aria-label="Шиномонтаж «Колесо», на главную">
+        <svg class="logo__icon" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14"/><circle cx="16" cy="16" r="6"/></svg>
+        <span>Колесо</span>
+      </a>
+      <button class="burger" type="button" aria-controls="nav" aria-expanded="false" aria-label="Открыть меню">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav" id="nav" aria-label="Разделы сайта">
+        <a href="#services">Услуги</a>
+        <a href="#calc">Калькулятор</a>
+        <a href="#booking">Запись</a>
+        <a href="#faq">Вопросы</a>
+        <a href="#contacts">Контакты</a>
+        <button class="theme-toggle" type="button" data-theme-toggle>Оформление: <b data-theme-name>Классика</b></button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="container hero__row">
+        <div class="hero__text">
+          <p class="hero__tag">Куркино · каждый день 9:00–21:00</p>
+          <h1>Переобуем машину за&nbsp;40&nbsp;минут</h1>
+          <p class="hero__lead">Шиномонтаж, балансировка, ремонт и сезонное хранение. Цену видно заранее — посчитайте в калькуляторе и запишитесь на удобное время без звонка.</p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#booking">Записаться</a>
+            <a class="btn btn--ghost" href="#calc">Посчитать цену</a>
+          </div>
+        </div>
+        <ul class="hero__facts">
+          <li><b>от 1600 ₽</b><span>шиномонтаж комплекта</span></li>
+          <li><b>4 поста</b><span>без долгой очереди</span></li>
+          <li><b>3000 ₽</b><span>хранение на сезон</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="services" aria-labelledby="services-title">
+      <div class="container">
+        <h2 id="services-title">Услуги и цены</h2>
+        <div class="catalog__tools">
+          <label class="search">
+            <span class="visually-hidden">Поиск услуги</span>
+            <input type="search" id="search" placeholder="Найти услугу: балансировка, прокол…" autocomplete="off">
+          </label>
+          <div class="chips" role="group" aria-label="Раздел каталога" id="chips"></div>
+        </div>
+        <p class="catalog__count" id="catalog-count" aria-live="polite"></p>
+        <ul class="catalog" id="catalog"></ul>
+        <p class="catalog__empty" id="catalog-empty" hidden>Ничего не нашлось. Попробуйте другое слово или раздел «Все».</p>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="calc" aria-labelledby="calc-title">
+      <div class="container calc">
+        <div>
+          <h2 id="calc-title">Калькулятор</h2>
+          <p>Цена за комплект из четырёх колёс. Точную сумму мастер назовёт до начала работы.</p>
+        </div>
+        <form class="calc__form" id="calc-form" novalidate>
+          <label class="field">
+            <span>Радиус колёс</span>
+            <select name="radius" id="calc-radius"></select>
+          </label>
+          <fieldset class="field">
+            <legend>Тип машины</legend>
+            <label class="radio"><input type="radio" name="car" value="car" checked> Легковая</label>
+            <label class="radio"><input type="radio" name="car" value="crossover"> Кроссовер</label>
+            <label class="radio"><input type="radio" name="car" value="suv"> Внедорожник</label>
+          </fieldset>
+          <fieldset class="field">
+            <legend>Услуги</legend>
+            <label class="check"><input type="checkbox" name="mount" checked> Шиномонтаж</label>
+            <label class="check"><input type="checkbox" name="balance" checked> Балансировка</label>
+            <label class="check"><input type="checkbox" name="repair"> Ремонт прокола</label>
+            <label class="check"><input type="checkbox" name="storage"> Хранение на сезон</label>
+          </fieldset>
+          <output class="calc__total" id="calc-total" for="calc-form" aria-live="polite"></output>
+        </form>
+      </div>
+    </section>
+
+    <section class="section" id="booking" aria-labelledby="booking-title">
+      <div class="container booking">
+        <div>
+          <h2 id="booking-title">Запись</h2>
+          <p>Оставьте заявку — администратор перезвонит в течение 15 минут и подтвердит время.</p>
+        </div>
+        <form class="booking__form" id="booking-form" novalidate>
+          <label class="field">
+            <span>Имя</span>
+            <input name="name" autocomplete="name" required>
+            <small class="field__error" data-error-for="name"></small>
+          </label>
+          <label class="field">
+            <span>Телефон</span>
+            <input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (900) 000-00-00" required>
+            <small class="field__error" data-error-for="phone"></small>
+          </label>
+          <div class="field-row">
+            <label class="field">
+              <span>Дата</span>
+              <input name="date" type="date" required>
+              <small class="field__error" data-error-for="date"></small>
+            </label>
+            <label class="field">
+              <span>Время</span>
+              <select name="time" required></select>
+              <small class="field__error" data-error-for="time"></small>
+            </label>
+          </div>
+          <label class="field">
+            <span>Услуга</span>
+            <select name="service" required></select>
+            <small class="field__error" data-error-for="service"></small>
+          </label>
+          <button class="btn btn--primary" type="submit">Отправить заявку</button>
+          <p class="booking__done" id="booking-done" role="status" hidden></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="faq" aria-labelledby="faq-title">
+      <div class="container">
+        <h2 id="faq-title">Частые вопросы</h2>
+        <details>
+          <summary>Сколько длится переобувка?</summary>
+          <p>Комплект с балансировкой — около 40 минут. Если колёса на хранении у нас, привезём их к началу записи.</p>
+        </details>
+        <details>
+          <summary>Можно ли приехать без записи?</summary>
+          <p>Можно, но в сезон очередь бывает до двух часов. По записи — без ожидания.</p>
+        </details>
+        <details>
+          <summary>Как хранятся шины?</summary>
+          <p>В сухом отапливаемом складе, на стеллажах, в чехлах. Комплект маркируем и фотографируем при приёме.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="section" id="contacts" aria-labelledby="contacts-title">
+      <div class="container contacts">
+        <h2 id="contacts-title">Контакты</h2>
+        <address>
+          Москва, Куркино, ул. Соколово-Мещерская, 25<br>
+          Каждый день 9:00–21:00<br>
+          <a href="tel:+74950000000">+7 (495) 000-00-00</a>
+        </address>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">© Шиномонтаж «Колесо». Учебный проект: компания и цены вымышлены.</div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,25 @@
+[project]
+name = "tire-service-site"
+version = "1.0.0"
+description = "Сайт шиномонтажа по брифу: HTML, CSS и JavaScript без библиотек, проверки в браузере"
+requires-python = ">=3.12"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "pytest-playwright>=0.7",
+    "playwright>=1.55",
+    "ruff>=0.6",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--browser chromium"
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
