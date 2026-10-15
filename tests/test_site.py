@@ -1,4 +1,5 @@
 from datetime import date, timedelta
+from pathlib import Path
 
 import pytest
 from playwright.sync_api import Page, expect
@@ -197,3 +198,12 @@ def test_404_page_keeps_chosen_theme(site: Page, site_url):
     site.click("[data-theme-toggle]")
     site.goto(site_url + "404.html")
     expect(site.locator("html")).to_have_attribute("data-theme", "bold")
+
+
+def test_every_page_is_published():
+    """Публикуется то, что копирует workflow: страница вне списка не попадёт на сайт."""
+    root = Path(__file__).resolve().parents[1]
+    workflow = next((root / ".github" / "workflows").glob("*.yml")).read_text(encoding="utf-8")
+    copy = next(line for line in workflow.splitlines() if "_site/" in line and "cp " in line)
+    for page in root.glob("*.html"):
+        assert page.name in copy.split(), f"{page.name} не попадёт на GitHub Pages"
