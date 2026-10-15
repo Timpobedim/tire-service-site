@@ -181,3 +181,19 @@ def test_primary_button_text_is_readable_in_both_themes(site: Page, theme):
     colors = site.evaluate("""() => { const s = getComputedStyle(document.querySelector('.btn--primary'));
         return [s.color, s.backgroundColor] }""")
     assert colors[0] != colors[1]
+
+
+# ---------------------------------------------------------------- страница 404
+
+
+def test_404_page_leads_home(page: Page, site_url):
+    page.goto(site_url + "404.html")
+    expect(page.get_by_role("heading", level=1)).to_have_text("Такой страницы нет")
+    page.get_by_role("link", name="На главную").click()
+    expect(page.locator(".card")).to_have_count(10)
+
+
+def test_404_page_keeps_chosen_theme(site: Page, site_url):
+    site.click("[data-theme-toggle]")
+    site.goto(site_url + "404.html")
+    expect(site.locator("html")).to_have_attribute("data-theme", "bold")
